@@ -141,49 +141,55 @@ end
 --if GetVehicleMaxNumberOfPassengers(veh) > 1 then
 function ChopVehicle()
 	ESX.TriggerServerCallback('Lenzh_chopshop:isCooldown', function(cooldown)
-		if cooldown <= 0 then
-			if Config.CallCops then
-				local randomReport = math.random(1, Config.CallCopsPercent)
+	    if cooldown <= 0 then
+			ESX.TriggerServerCallback('Lenzh_chopshop:anycops', function(anycops)
+			    if anycops >= Config.CopsRequired then
+			        if Config.CallCops then
+				      local randomReport = math.random(1, Config.CallCopsPercent)
 
-				if randomReport == Config.CallCopsPercent then
-					TriggerServerEvent('chopNotify')
+				        if randomReport == Config.CallCopsPercent then
+					      TriggerServerEvent('chopNotify')
+				        end
+			        end
+			        local ped = GetPlayerPed(-1)
+			        local vehicle = GetVehiclePedIsIn( ped, false )
+                      exports.pNotify:SendNotification({text = "Chopping vehicle, please wait...", type = "error", timeout = Config.NotificationTotalTime, layout = "centerRight", queue = "right", animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
+
+				    SetVehicleEngineOn(vehicle, false, false, true)
+				    SetVehicleUndriveable(vehicle, false)
+				    SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, false, false)
+				    Citizen.Wait(Config.DoorBrokenTime)
+				    SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, true)
+				    Citizen.Wait(Config.DoorOpenTime)
+				    SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, false, false)
+				    Citizen.Wait(Config.DoorBrokenTime1)
+				    SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, true)
+				    Citizen.Wait(Config.DoorOpenTime1)
+				    SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, false, false)
+				    Citizen.Wait(Config.DoorBrokenTime2)
+				    SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, true)
+				    Citizen.Wait(Config.DoorOpenTime2)
+				    SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, false, false)
+				    Citizen.Wait(Config.DoorBrokenTime3)
+				    SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, true)
+				    Citizen.Wait(Config.DoorOpenTime3)
+				    SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4, false, false)
+				    Citizen.Wait(Config.DoorBrokenTime4)
+				    SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false),4, true)
+				    Citizen.Wait(Config.DoorOpenTime4)
+				    SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5, false, false)
+				    Citizen.Wait(Config.DoorBrokenTime5)
+				    SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false),5, true)
+				    Citizen.Wait(Config.DoorOpenTime5)
+				    DeleteVehicle()
+				    exports.pNotify:SendNotification({text = "Vehicle Chopped Successfully...", type = "success", timeout = 1000, layout = "centerRight", queue = "right", animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
+                else
+				  ESX.ShowNotification(_U('not_enough_cops'))	
 				end
-			end
-			local ped = GetPlayerPed(-1)
-			local vehicle = GetVehiclePedIsIn( ped, false )
-        exports.pNotify:SendNotification({text = "Chopping vehicle, please wait...", type = "error", timeout = Config.NotificationTotalTime, layout = "centerRight", queue = "right", animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
-
-				SetVehicleEngineOn(vehicle, false, false, true)
-				SetVehicleUndriveable(vehicle, false)
-				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, false, false)
-				Citizen.Wait(Config.DoorBrokenTime)
-				SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 0, true)
-				Citizen.Wait(Config.DoorOpenTime)
-				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, false, false)
-				Citizen.Wait(Config.DoorBrokenTime1)
-				SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 1, true)
-				Citizen.Wait(Config.DoorOpenTime1)
-				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, false, false)
-				Citizen.Wait(Config.DoorBrokenTime2)
-				SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 2, true)
-				Citizen.Wait(Config.DoorOpenTime2)
-				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, false, false)
-				Citizen.Wait(Config.DoorBrokenTime3)
-				SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false), 3, true)
-				Citizen.Wait(Config.DoorOpenTime3)
-				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 4, false, false)
-				Citizen.Wait(Config.DoorBrokenTime4)
-				SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false),4, true)
-				Citizen.Wait(Config.DoorOpenTime4)
-				SetVehicleDoorOpen(GetVehiclePedIsIn(GetPlayerPed(-1), false), 5, false, false)
-				Citizen.Wait(Config.DoorBrokenTime5)
-				SetVehicleDoorBroken(GetVehiclePedIsIn(GetPlayerPed(-1), false),5, true)
-				Citizen.Wait(Config.DoorOpenTime5)
-				DeleteVehicle()
-				exports.pNotify:SendNotification({text = "Vehicle Chopped Successfully...", type = "success", timeout = 1000, layout = "centerRight", queue = "right", animation = {open = "gta_effects_fade_in", close = "gta_effects_fade_out"}})
-			else
-				ESX.ShowNotification(_U('cooldown', math.ceil(cooldown/1000)))
-	    end
+			end)	    
+		else
+	      ESX.ShowNotification(_U('cooldown', math.ceil(cooldown/1000)))
+		end
 	end)
 end
 

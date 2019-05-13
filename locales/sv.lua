@@ -1,0 +1,17 @@
+Locales['sv'] = {
+  ['press_to_chop'] = "Tryck ~INPUT_CONTEXT~ för att demontera fordon",
+  ['map_blip'] = "Bildemontering",
+  ['map_blip_shop'] = "Stanley's Bildelar",
+  ['no_vehicle'] = "Du måste sitta i ett fordon.",
+  ['open_shop'] = "Tryck ~INPUT_CONTEXT~ för att komma åt ~y~affären~s~.",
+  ['sold'] = "Du sålde ~b~%sx~s~ ~y~%s~s~ för ~g~$%s~s~",
+  ['not_enough'] = 'Du har inte tillräckligt för att kunna sälja!',
+  ['shop_prompt'] = 'tryck ~INPUT_CONTEXT~ för att prata med ~r~Stanley~s~.',
+  ['item'] = '$%s',
+  ['shop_title'] = 'Stanley\'s Bildelar',
+  ['cooldown'] = '~s~Du måste ~g~vänta ~r~%s sekunder ~s~innan du kan ~g~demontera ~s~ett annat fordon.',
+  ['call'] = 'Någon håller på att demontera ett stulet fordon.',
+  ['911'] = '911 Samtal',
+  ['chop'] = 'Bildemontering',
+  ['not_enough_cops'] = 'Inte nog med poliser i tjänst',
+}
