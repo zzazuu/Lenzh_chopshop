@@ -15,7 +15,7 @@ ESX.RegisterServerCallback('Lenzh_chopshop:anycops',function(source, cb)
         end
       end
     cb(anycops)
-  end)
+end)
 
 ESX.RegisterServerCallback('Lenzh_chopshop:isCooldown',function(source, cb)
     cb(cooldown)
